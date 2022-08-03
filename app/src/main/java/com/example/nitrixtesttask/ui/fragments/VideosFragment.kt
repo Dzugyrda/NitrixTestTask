@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nitrixtesttask.R
 import com.example.nitrixtesttask.adapters.VideosAdapter
+import com.example.nitrixtesttask.ui.VideosActivity
 import com.example.nitrixtesttask.ui.VideosViewModel
 import kotlinx.android.synthetic.main.videos_list_fragment.*
 
 class VideosFragment : Fragment(R.layout.videos_list_fragment) {
-    private val adapter: VideosAdapter = VideosAdapter()
-    private val videosViewModel: VideosViewModel by viewModels()
+    lateinit var videosAdapter: VideosAdapter
+    lateinit var videosViewModel: VideosViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        rvVideos.adapter = adapter
+        videosViewModel = (activity as VideosActivity).viewModel
+        setupRecyclerView()
         observeVideos()
     }
 
@@ -25,11 +28,19 @@ class VideosFragment : Fragment(R.layout.videos_list_fragment) {
                 viewState.isLoading -> {}
                 viewState.isError -> {}
                 viewState.isSuccess && viewState.videos?.isNotEmpty() == true -> {
-                    adapter.setList(viewState.videos)
+                    videosAdapter.setList(viewState.videos)
                 }
                 viewState.videos?.isEmpty() == true -> {}
             }
 
+        }
+    }
+
+    private fun setupRecyclerView() {
+        videosAdapter = VideosAdapter()
+        rvVideos.apply {
+            adapter = videosAdapter
+            layoutManager = LinearLayoutManager(activity)
         }
     }
 
