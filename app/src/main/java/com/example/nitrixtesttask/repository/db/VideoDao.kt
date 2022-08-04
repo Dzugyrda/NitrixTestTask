@@ -11,7 +11,10 @@ interface VideoDao {
     suspend fun insertAll(videosEntity: List<VideoEntity>)
 
     @Query("SELECT * FROM videos")
-    fun getAllVideos(): Flow<List<VideoEntity>>
+    fun observeAllVideos(): Flow<List<VideoEntity>>
+
+    @Query("SELECT * FROM videos")
+    suspend fun getAllVideos(): List<VideoEntity>
 
     @Query("DELETE FROM videos")
     suspend fun deleteAllVideos()

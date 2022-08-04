@@ -2,7 +2,6 @@ package com.example.nitrixtesttask.repository
 
 import android.util.Log
 import androidx.room.withTransaction
-import com.example.nitrixtesttask.repository.api.RetrofitInstance
 import com.example.nitrixtesttask.repository.api.VideosApi
 import com.example.nitrixtesttask.repository.api.model.toEntity
 import com.example.nitrixtesttask.repository.db.model.VideoEntity
@@ -38,5 +37,7 @@ class VideosRepository @Inject constructor(
         return false//apiResult.isSuccessful
     }
 
-    fun observeVideos(): Flow<List<VideoEntity>> = videosDao.getAllVideos()
+    fun observeVideos(): Flow<List<VideoEntity>> = videosDao.observeAllVideos()
+
+    suspend fun getVideos(): List<VideoEntity> = videosDao.getAllVideos()
 }

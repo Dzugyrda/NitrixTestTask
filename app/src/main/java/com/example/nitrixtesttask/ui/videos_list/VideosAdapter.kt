@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nitrixtesttask.R
 import com.example.nitrixtesttask.repository.api.Constants.Companion.BASE_IMAGE_URL
+import com.example.nitrixtesttask.ui.video_player_screen.VideoPlayerFragmentArgs
 import com.example.nitrixtesttask.ui.videos_list.model.VideoItem
 import kotlinx.android.synthetic.main.video_list_item.view.*
 
@@ -35,14 +36,17 @@ class VideosAdapter : RecyclerView.Adapter<VideosAdapter.VideosViewHolder>() {
 
 
     override fun onBindViewHolder(holder: VideosViewHolder, position: Int) {
+        val video = videosList[position]
         holder.itemView.apply {
-            Glide.with(this).load(BASE_IMAGE_URL + videosList[position].prevImageUrl).centerCrop()
+            Glide.with(this).load(BASE_IMAGE_URL + video.prevImageUrl).fitCenter()
                 .into(ivVideoPreview)
-            tvVideoTitle.text = videosList[position].title
-            tvVideoSubtitle.text = videosList[position].subtitle
-            tvVideoDesc.text = videosList[position].description
+            tvVideoTitle.text = video.title
+            tvVideoSubtitle.text = video.subtitle
+            tvVideoDesc.text = video.description
             setOnClickListener {
-                findNavController().navigate(R.id.action_videosListFragment_to_videoFragment)
+                findNavController().navigate(
+                    VideosFragmentDirections.actionVideosListFragmentToVideoFragment(video.id)
+                )
             }
         }
     }

@@ -12,6 +12,7 @@
         android:id="@+id/ivVideoPreview"
         android:layout_width="200dp"
         android:layout_height="200dp"
+        android:scaleType="fitCenter"
         app:srcCompat="@drawable/vwgti" />
 
     <LinearLayout
