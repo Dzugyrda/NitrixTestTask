@@ -2,6 +2,7 @@ package com.example.nitrixtesttask.ui.videos_list
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -23,8 +24,16 @@ class VideosFragment : Fragment(R.layout.videos_list_fragment) {
 
     private fun observeVideos() {
         lifecycleScope.launch {
-            videosViewModel.viewState.collect {
-                videosAdapter.setList(it.videos)
+            videosViewModel.viewState.collect { viewState ->
+                when {
+                    viewState.isLoading -> showLoading()
+                    viewState.isError -> {}
+                    viewState.videos.isNotEmpty() -> {
+                        hideLoading()
+                        videosAdapter.setList(viewState.videos)
+                    }
+                    viewState.videos.isEmpty() -> {}
+                }
             }
         }
     }
@@ -36,5 +45,13 @@ class VideosFragment : Fragment(R.layout.videos_list_fragment) {
         }
     }
 
+    private fun showLoading() {
+        rvVideos.isVisible = false
+        pbLoader.isVisible = true
+    }
 
+    private fun hideLoading() {
+        rvVideos.isVisible = true
+        pbLoader.isVisible = false
+    }
 }

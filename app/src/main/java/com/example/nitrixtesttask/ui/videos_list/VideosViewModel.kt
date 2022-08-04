@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 
 data class VideosViewState(
     val videos: List<VideoItem> = emptyList(),
-    val isSuccess: Boolean = false,
     val isError: Boolean = false,
     val isLoading: Boolean = true
 )
@@ -24,9 +23,12 @@ class VideosViewModel : ViewModel() {
 
     val viewState: StateFlow<VideosViewState> = videosRepository.observeVideos()
         .map { videosEntity ->
-            VideosViewState(videos = videosEntity.map { videoEntity ->
-                videoEntity.toVideoItem()
-            })
+            VideosViewState(
+                videos = videosEntity.map { videoEntity ->
+                    videoEntity.toVideoItem()
+                },
+                isLoading = false
+            )
         }
         .stateIn(viewModelScope, SharingStarted.Eagerly, VideosViewState())
 
