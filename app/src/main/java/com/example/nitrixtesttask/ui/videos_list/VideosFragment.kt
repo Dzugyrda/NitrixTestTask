@@ -8,9 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.nitrixtesttask.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.videos_list_fragment.*
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class VideosFragment : Fragment(R.layout.videos_list_fragment) {
 
     private val videosAdapter: VideosAdapter = VideosAdapter()

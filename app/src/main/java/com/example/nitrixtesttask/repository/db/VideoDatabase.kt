@@ -18,21 +18,4 @@ abstract class VideoDatabase : RoomDatabase() {
 
     abstract fun getVideoDao(): VideoDao
 
-    companion object {
-        @Volatile
-        private var instance: VideoDatabase? = null
-        private val LOCK = Any()
-
-        operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
-            instance ?: createDatabase(context).also { instance = it }
-        }
-
-        private fun createDatabase(context: Context) =
-            Room.databaseBuilder(
-                context.applicationContext,
-                VideoDatabase::class.java,
-                "videos_db.db"
-            ).build()
-
-    }
 }

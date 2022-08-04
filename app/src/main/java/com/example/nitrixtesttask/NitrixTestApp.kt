@@ -1,12 +1,7 @@
 package com.example.nitrixtesttask
 
 import android.app.Application
-import com.example.nitrixtesttask.repository.db.DatabaseManager
+import dagger.hilt.android.HiltAndroidApp
 
-class NitrixTestApp: Application() {
-
-    override fun onCreate() {
-        super.onCreate()
-        DatabaseManager.initDataBase(this)
-    }
-}
+@HiltAndroidApp
+class NitrixTestApp: Application()
