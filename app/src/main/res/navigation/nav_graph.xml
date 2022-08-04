@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/videosListFragment"
-        android:name="com.example.nitrixtesttask.ui.fragments.VideosFragment"
+        android:name="com.example.nitrixtesttask.ui.videos_list.VideosFragment"
         android:label="VideosListFragment">
         <action
             android:id="@+id/action_videosListFragment_to_videoFragment"
@@ -14,6 +14,6 @@
     </fragment>
     <fragment
         android:id="@+id/videoFragment"
-        android:name="com.example.nitrixtesttask.ui.fragments.VideoFragment"
+        android:name="com.example.nitrixtesttask.ui.video_player_screen.VideoFragment"
         android:label="VideoFragment" />
 </navigation>

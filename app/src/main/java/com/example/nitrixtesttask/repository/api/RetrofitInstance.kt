@@ -1,6 +1,6 @@
 package com.example.nitrixtesttask.repository.api
 
-import com.example.nitrixtesttask.util.Constants.Companion.BASE_URL
+import com.example.nitrixtesttask.repository.api.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

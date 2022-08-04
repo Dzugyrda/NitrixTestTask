@@ -1,4 +1,4 @@
-package com.example.nitrixtesttask.adapters
+package com.example.nitrixtesttask.ui.videos_list
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,13 +8,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nitrixtesttask.R
-import com.example.nitrixtesttask.repository.db.model.VideoEntity
-import com.example.nitrixtesttask.util.Constants.Companion.BASE_IMAGE_URL
+import com.example.nitrixtesttask.repository.api.Constants.Companion.BASE_IMAGE_URL
+import com.example.nitrixtesttask.ui.videos_list.model.VideoItem
 import kotlinx.android.synthetic.main.video_list_item.view.*
 
 class VideosAdapter : RecyclerView.Adapter<VideosAdapter.VideosViewHolder>() {
 
-    private var videosList: List<VideoEntity> = mutableListOf()
+    private var videosList: List<VideoItem> = mutableListOf()
 
     inner class VideosViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
@@ -36,7 +36,7 @@ class VideosAdapter : RecyclerView.Adapter<VideosAdapter.VideosViewHolder>() {
 
     override fun onBindViewHolder(holder: VideosViewHolder, position: Int) {
         holder.itemView.apply {
-            Glide.with(this).load(BASE_IMAGE_URL + videosList[position].thumb).centerCrop()
+            Glide.with(this).load(BASE_IMAGE_URL + videosList[position].prevImageUrl).centerCrop()
                 .into(ivVideoPreview)
             tvVideoTitle.text = videosList[position].title
             tvVideoSubtitle.text = videosList[position].subtitle
@@ -48,7 +48,7 @@ class VideosAdapter : RecyclerView.Adapter<VideosAdapter.VideosViewHolder>() {
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setList(list: List<VideoEntity>) {
+    fun setList(list: List<VideoItem>) {
         videosList = list
         notifyDataSetChanged()
     }

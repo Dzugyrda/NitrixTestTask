@@ -1,4 +1,4 @@
-package com.example.nitrixtesttask.ui
+package com.example.nitrixtesttask.ui.videos_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

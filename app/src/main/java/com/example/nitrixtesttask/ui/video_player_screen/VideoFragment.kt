@@ -1,4 +1,4 @@
-package com.example.nitrixtesttask.ui.fragments
+package com.example.nitrixtesttask.ui.video_player_screen
 
 import androidx.fragment.app.Fragment
 import com.example.nitrixtesttask.R
