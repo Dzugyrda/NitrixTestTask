@@ -1,4 +1,4 @@
-package com.example.nitrixtesttask.db
+package com.example.nitrixtesttask.repository.db
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

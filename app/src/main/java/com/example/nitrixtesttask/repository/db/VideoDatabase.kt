@@ -1,15 +1,15 @@
-package com.example.nitrixtesttask.db
+package com.example.nitrixtesttask.repository.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.nitrixtesttask.models.Video
+import com.example.nitrixtesttask.repository.db.model.VideoEntity
 
 
 @Database(
-    entities = [Video::class],
+    entities = [VideoEntity::class],
     version = 1
 )
 

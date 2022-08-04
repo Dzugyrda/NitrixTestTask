@@ -1,58 +1,36 @@
 package com.example.nitrixtesttask.ui
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.nitrixtesttask.models.Video
-import com.example.nitrixtesttask.models.VideoResponse
+import com.example.nitrixtesttask.repository.db.model.VideoEntity
 import com.example.nitrixtesttask.repository.VideosRepository
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 data class VideosViewState(
-    val videos: VideoResponse? = null,
+    val videos: List<VideoEntity> = emptyList(),
     val isSuccess: Boolean = false,
     val isError: Boolean = false,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = true
 )
 
-class VideosViewModel(
-    val videosRepository: VideosRepository
-) : ViewModel() {
+class VideosViewModel() : ViewModel() {
 
-    val viewState = MutableLiveData(
-        VideosViewState(isLoading = true)
-    )
+    private val videosRepository: VideosRepository = VideosRepository()
+
+    val viewState: StateFlow<VideosViewState> = videosRepository.observeVideos()
+        .map { videos ->
+            VideosViewState(videos = videos)
+        }
+        .stateIn(viewModelScope, SharingStarted.Eagerly, VideosViewState())
 
     init {
         viewModelScope.launch {
-            val videosResponseResult = videosRepository.getAllVideos()
-            when {
-                videosResponseResult.isSuccessful -> {
-                    viewState.postValue(
-                        VideosViewState(
-                            videos = videosResponseResult.body(),
-                            isSuccess = true
-                        )
-                    )
-                }
-                !videosResponseResult.isSuccessful -> {
-                    viewState.postValue(
-                        VideosViewState(isError = true)
-                    )
-                }
-            }
-
+            videosRepository.fetchVideos()
         }
-    }
-
-    fun saveVideo(video: Video) = viewModelScope.launch {
-        videosRepository.upsert(video)
-    }
-
-    fun getSavedVideos() = videosRepository.getSavedVideos()
-
-    fun deleteVideo(video: Video) = viewModelScope.launch {
-        videosRepository.deleteVideo(video)
     }
 }
 

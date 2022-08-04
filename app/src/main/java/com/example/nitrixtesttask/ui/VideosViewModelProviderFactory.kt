@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.nitrixtesttask.repository.VideosRepository
 
 class VideosViewModelProviderFactory(
-    val videosRepository: VideosRepository
-) : ViewModelProvider.Factory {
+    private val videosRepository: VideosRepository
+) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return VideosViewModel(videosRepository) as T
+        return VideosViewModel() as T
     }
 }

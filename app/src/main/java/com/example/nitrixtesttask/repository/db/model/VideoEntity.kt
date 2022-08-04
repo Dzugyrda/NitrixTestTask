@@ -1,4 +1,4 @@
-package com.example.nitrixtesttask.models
+package com.example.nitrixtesttask.repository.db.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "videos"
 )
-data class Video(
+data class VideoEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int? = null,
     val description: String,
