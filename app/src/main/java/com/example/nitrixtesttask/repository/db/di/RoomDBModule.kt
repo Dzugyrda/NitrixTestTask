@@ -9,6 +9,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 
 @InstallIn(SingletonComponent::class)
@@ -16,11 +17,13 @@ import dagger.hilt.components.SingletonComponent
 class RoomDBModule {
 
     @Provides
+    @Singleton
     fun provideVideoDao(appDatabase: VideoDatabase): VideoDao {
         return appDatabase.getVideoDao()
     }
 
     @Provides
+    @Singleton
     fun provideAppDatabase(@ApplicationContext appContext: Context): VideoDatabase {
         return Room.databaseBuilder(
             appContext,
