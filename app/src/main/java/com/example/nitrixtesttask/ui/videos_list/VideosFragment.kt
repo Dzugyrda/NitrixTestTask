@@ -27,12 +27,11 @@ class VideosFragment : Fragment(R.layout.videos_list_fragment) {
             videosViewModel.viewState.collect { viewState ->
                 when {
                     viewState.isLoading -> showLoading()
-                    viewState.isError -> {}
                     viewState.videos.isNotEmpty() -> {
                         hideLoading()
                         videosAdapter.setList(viewState.videos)
                     }
-                    viewState.videos.isEmpty() -> {}
+                    viewState.videos.isEmpty() -> showError("Videos not found")
                 }
             }
         }
@@ -53,5 +52,12 @@ class VideosFragment : Fragment(R.layout.videos_list_fragment) {
     private fun hideLoading() {
         rvVideos.isVisible = true
         pbLoader.isVisible = false
+    }
+
+    private fun showError(error: String) {
+        rvVideos.isVisible = false
+        pbLoader.isVisible = false
+        tvError.isVisible = true
+        tvError.text = error
     }
 }

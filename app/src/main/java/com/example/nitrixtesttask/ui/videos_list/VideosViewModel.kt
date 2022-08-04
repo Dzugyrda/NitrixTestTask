@@ -13,7 +13,6 @@ import kotlinx.coroutines.launch
 
 data class VideosViewState(
     val videos: List<VideoItem> = emptyList(),
-    val isError: Boolean = false,
     val isLoading: Boolean = true
 )
 
