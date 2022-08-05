@@ -6,9 +6,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.nitrixtesttask.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.videos_list_fragment.*
@@ -17,7 +15,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class VideosListFragment : Fragment(R.layout.videos_list_fragment) {
 
-    private val videosAdapter: VideosListAdapter = VideosListAdapter()
+    private val videosListAdapter: VideosListAdapter = VideosListAdapter()
     private val videosViewModel: VideosViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +31,7 @@ class VideosListFragment : Fragment(R.layout.videos_list_fragment) {
                     viewState.isLoading -> showLoading()
                     viewState.videos.isNotEmpty() -> {
                         hideLoading()
-                        videosAdapter.setList(viewState.videos)
+                        videosListAdapter.submitList(viewState.videos)
                     }
                     viewState.videos.isEmpty() -> showError("Videos not found. \nCheck your Internet connection!")
                 }
@@ -43,7 +41,7 @@ class VideosListFragment : Fragment(R.layout.videos_list_fragment) {
 
     private fun setupRecyclerView() {
         rvVideos.apply {
-            adapter = videosAdapter
+            adapter = videosListAdapter
             layoutManager = LinearLayoutManager(activity)
         }
     }
