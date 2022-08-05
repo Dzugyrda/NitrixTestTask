@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/petro.ubohyi/StudioProjects/NitrixTestTask/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/petro.ubohyi/StudioProjects/NitrixTestTask/app/src/main/res/layout/divider_drawable.xml" value="0.2625" />
         <entry key="..\:/Users/petro.ubohyi/StudioProjects/NitrixTestTask/app/src/main/res/layout/list_item.xml" value="0.264" />
+        <entry key="..\:/Users/petro.ubohyi/StudioProjects/NitrixTestTask/app/src/main/res/layout/new_video_item.xml" value="0.264" />
         <entry key="..\:/Users/petro.ubohyi/StudioProjects/NitrixTestTask/app/src/main/res/layout/video_fragment.xml" value="0.2625" />
         <entry key="..\:/Users/petro.ubohyi/StudioProjects/NitrixTestTask/app/src/main/res/layout/video_list_item.xml" value="0.2625" />
         <entry key="..\:/Users/petro.ubohyi/StudioProjects/NitrixTestTask/app/src/main/res/layout/videos_fragment.xml" value="0.2625" />

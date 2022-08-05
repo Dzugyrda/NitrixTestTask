@@ -9,7 +9,7 @@ import com.example.nitrixtesttask.R
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.video_fragment.*
+import kotlinx.android.synthetic.main.video_player_fragment.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

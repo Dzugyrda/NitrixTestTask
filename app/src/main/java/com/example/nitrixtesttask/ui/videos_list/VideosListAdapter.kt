@@ -9,11 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.nitrixtesttask.R
 import com.example.nitrixtesttask.repository.api.Constants.Companion.BASE_IMAGE_URL
-import com.example.nitrixtesttask.ui.video_player_screen.VideoPlayerFragmentArgs
 import com.example.nitrixtesttask.ui.videos_list.model.VideoItem
 import kotlinx.android.synthetic.main.video_list_item.view.*
 
-class VideosAdapter : RecyclerView.Adapter<VideosAdapter.VideosViewHolder>() {
+class VideosListAdapter : RecyclerView.Adapter<VideosListAdapter.VideosViewHolder>() {
 
     private var videosList: List<VideoItem> = mutableListOf()
 
@@ -38,16 +37,17 @@ class VideosAdapter : RecyclerView.Adapter<VideosAdapter.VideosViewHolder>() {
     override fun onBindViewHolder(holder: VideosViewHolder, position: Int) {
         val video = videosList[position]
         holder.itemView.apply {
-            Glide.with(this).load(BASE_IMAGE_URL + video.prevImageUrl).fitCenter()
+            ivVideoPreview.setOnClickListener {
+                findNavController().navigate(
+                    VideosListFragmentDirections.actionVideosListFragmentToVideoFragment(video.id)
+                )
+            }
+            Glide.with(this).load(BASE_IMAGE_URL + video.prevImageUrl)
+                .fitCenter()
                 .into(ivVideoPreview)
             tvVideoTitle.text = video.title
             tvVideoSubtitle.text = video.subtitle
             tvVideoDesc.text = video.description
-            setOnClickListener {
-                findNavController().navigate(
-                    VideosFragmentDirections.actionVideosListFragmentToVideoFragment(video.id)
-                )
-            }
         }
     }
 

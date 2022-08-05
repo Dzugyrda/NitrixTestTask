@@ -19,7 +19,7 @@ class VideosRepository @Inject constructor(
     private val videosApi: VideosApi
 ) {
 
-    suspend fun fetchVideos(): Boolean {
+    suspend fun fetchVideos() {
         try {
             val apiResult = videosApi.getAllVideos()
             if (apiResult.isSuccessful) {
@@ -34,7 +34,6 @@ class VideosRepository @Inject constructor(
         } catch (ex: Exception) {
             Log.d("RETROFIT", ex.toString())
         }
-        return false//apiResult.isSuccessful
     }
 
     fun observeVideos(): Flow<List<VideoEntity>> = videosDao.observeAllVideos()

@@ -6,16 +6,18 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.nitrixtesttask.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.videos_list_fragment.*
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class VideosFragment : Fragment(R.layout.videos_list_fragment) {
+class VideosListFragment : Fragment(R.layout.videos_list_fragment) {
 
-    private val videosAdapter: VideosAdapter = VideosAdapter()
+    private val videosAdapter: VideosListAdapter = VideosListAdapter()
     private val videosViewModel: VideosViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,7 +35,7 @@ class VideosFragment : Fragment(R.layout.videos_list_fragment) {
                         hideLoading()
                         videosAdapter.setList(viewState.videos)
                     }
-                    viewState.videos.isEmpty() -> showError("Videos not found")
+                    viewState.videos.isEmpty() -> showError("Videos not found. \nCheck your Internet connection!")
                 }
             }
         }
@@ -49,11 +51,13 @@ class VideosFragment : Fragment(R.layout.videos_list_fragment) {
     private fun showLoading() {
         rvVideos.isVisible = false
         pbLoader.isVisible = true
+        tvError.isVisible = false
     }
 
     private fun hideLoading() {
         rvVideos.isVisible = true
         pbLoader.isVisible = false
+        tvError.isVisible = false
     }
 
     private fun showError(error: String) {

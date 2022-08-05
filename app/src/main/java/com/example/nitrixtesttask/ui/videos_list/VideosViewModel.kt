@@ -24,7 +24,7 @@ class VideosViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    val viewState: StateFlow<VideosViewState> = videosRepository.observeVideos()
+    var viewState: StateFlow<VideosViewState> = videosRepository.observeVideos()
         .map { videosEntity ->
             VideosViewState(
                 videos = videosEntity.map { videoEntity ->
