@@ -11,6 +11,8 @@ import com.example.nitrixtesttask.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.videos_list_fragment.*
 import kotlinx.coroutines.launch
+import androidx.recyclerview.widget.DividerItemDecoration
+
 
 @AndroidEntryPoint
 class VideosListFragment : Fragment(R.layout.videos_list_fragment) {
@@ -40,9 +42,9 @@ class VideosListFragment : Fragment(R.layout.videos_list_fragment) {
     }
 
     private fun setupRecyclerView() {
+
         rvVideos.apply {
             adapter = videosListAdapter
-            layoutManager = LinearLayoutManager(activity)
         }
     }
 
